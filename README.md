@@ -19,3 +19,5 @@ paintAndHangPicture() 这种函数根据自变量的变化来完成操作，但�
 paintPicture() -> Painting  这种类型的函数不需要任何额外信息就可返回值。
 ✅ 参数，✅ 返回值
 paintPicture(width: Int, height: Int, dominantColor: UIColor) -> Painting  这种类型的函数基于传入的信息提供返回值。它接受所有输入建议并将它们转换为新的输出值。
+控制流程：
+代码在程序中执行的顺序称为“控制流程”。首先查找第一个不在函数中的可执行语句。(请记住，函数声明不执行代码；它们只是定义代码。)顺序语句按它们在代码段中出现的顺序执行。
