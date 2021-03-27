@@ -92,3 +92,17 @@ addPointAt(x: 7, y: 5, color: .black)
 addPointAt(x: -8, y: 2, color: .black)
 addPointAt(x: 10, y: -6, color: .black)
 addPointAt(x: -8, y: -9, color: .black)
+
+
+“func responseTo(question: String) -> String {
+  // TODO: Write a response
+  return "?"
+}
+ 
+responseTo(question:) 函数会接收一个 String，然后返回一个 String。目前，这个函数会忽略所有传入的问题并返回问号。
+”
+
+
+hasPrefix() 方法测试一个字符串是否以另一个字符串开头。
+"swift programming".hasPrefix("swift")
+
