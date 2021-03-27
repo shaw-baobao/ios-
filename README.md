@@ -61,3 +61,34 @@ addBarLabel("Bananas")
 addBarLabel("Limes")
 addBarLabel("Strawberries")
 addBarLabel("Grapes")
+
+散点图：addPointAt(x:y:color:) 函数可绘制一个数据点。
+
+x：数据点的 X 坐标。
+y：数据点的 Y 坐标。
+color：点的颜色。你可以使用以下任一值。(请记得在颜色名称前使用英文句点。) - .black - .blue - .brown - .cyan - .darkGray - .gray - .green - .lightGray - .magenta - .orange - .purple - .red - .yellow
+你可以使用以下两个函数设置 X 和 Y 轴的最大值和最小值。注意，在大多数情况下，两个轴不会以相同的比例显示。
+
+setXAxis(minimum:maximum:)
+
+minimum：轴的最小值，指定为 Double 型。
+maximum：轴的最大值，指定为 Double 型。
+
+setYAxis(minimum:maximum:)
+
+minimum：轴的最小值，指定为 Double 型。
+maximum：轴的最大值，指定为 Double 型。
+makePlot()
+
+setXAxis(minimum: -10, maximum: 10)
+setYAxis(minimum: -10, maximum: 10)
+
+addPointAt(x: 1, y: 2, color: .black)
+addPointAt(x: 3, y: 1, color: .black)
+addPointAt(x: 3, y: 4, color: .black)
+addPointAt(x: 2, y: 6, color: .black)
+addPointAt(x: 4, y: 5, color: .black)
+addPointAt(x: 7, y: 5, color: .black)
+addPointAt(x: -8, y: 2, color: .black)
+addPointAt(x: 10, y: -6, color: .black)
+addPointAt(x: -8, y: -9, color: .black)
