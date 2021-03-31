@@ -106,3 +106,8 @@ responseTo(question:) 函数会接收一个 String，然后返回一个 String�
 hasPrefix() 方法测试一个字符串是否以另一个字符串开头。
 "swift programming".hasPrefix("swift")
 
+lowercased 方法转换文本的大小写
+let question = "WHERE ARE THE COOKIES?"
+let lowerQuestion = question.lowercased()
+
+.count  获取字符串的长度
