@@ -104,6 +104,7 @@ responseTo(question:) 函数会接收一个 String，然后返回一个 String�
 
 
 hasPrefix() 方法测试一个字符串是否以另一个字符串开头。
+hasSuffix() 方法测试一个字符串是否以另一个字符串结尾。
 "swift programming".hasPrefix("swift")
 
 lowercased 方法转换文本的大小写
@@ -111,3 +112,11 @@ let question = "WHERE ARE THE COOKIES?"
 let lowerQuestion = question.lowercased()
 
 .count  获取字符串的长度
+使用 count 属性 (即 Int)，可以算出数组中的项目数
+
+添加项目：
+可以给一个类型加上括号，从而创建这个类型的实例。要创建一个可变的空数组来存放字符串，请执行以下操作：var list = [String]()
+创建数组之后，有几种方法向其中添加项目。你可以使用 append 实例方法来添加单个项目：list.append("Banana")
+你可以使用 insert 实例方法在特定索引处添加项目。索引可以用在任何地方，但它必须在数组的范围内，否则程序将崩溃：list.insert("Kumquat", at: 0)
+你可以使用复合赋值运算符 += 来追加整个数组的项目：list += ["Strawberry", "Plum", "Watermelon"]
+
