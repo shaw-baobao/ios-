@@ -113,10 +113,40 @@ let lowerQuestion = question.lowercased()
 
 .count  获取字符串的长度
 使用 count 属性 (即 Int)，可以算出数组中的项目数
-
+ 
+ 
+ 数组：
+ 
 添加项目：
 可以给一个类型加上括号，从而创建这个类型的实例。要创建一个可变的空数组来存放字符串，请执行以下操作：var list = [String]()
 创建数组之后，有几种方法向其中添加项目。你可以使用 append 实例方法来添加单个项目：list.append("Banana")
 你可以使用 insert 实例方法在特定索引处添加项目。索引可以用在任何地方，但它必须在数组的范围内，否则程序将崩溃：list.insert("Kumquat", at: 0)
 你可以使用复合赋值运算符 += 来追加整个数组的项目：list += ["Strawberry", "Plum", "Watermelon"]
 
+移除项目：
+从可变数组中移除项目，同样有多种方法。每种方法都会更新数组，而大部分方法都可以返回已经移除的项目。
+var numbers = [0,1,2,3,4]
+remove(at:) 方法可以返回已经移除的项目 let someNumber = numbers.remove(at: 2)
+你可以使用 removeFirst() 移除第一个项目：let firstNumber = numbers.removeFirst()
+你可以使用 removeLast() 移除最后一个项目：let lastNumber = numbers.removeLast()
+如果在空数组中使用 removeFirst() 或 removeLast()，将会导致错误。使用 removeAll() 可以移除“所有项目”，且不会返回任何项目：numbers.removeAll()
+
+替换项目
+var flavors = ["Chocolate", "Vanilla", "Strawberry", "Pistachio", "Rocky Road"]
+let firstFlavor = flavors[0] // Remember, the first item is at index 0
+在 Swift 中，语句 [0] 的部分称为“下标”。
+对于可变数组，你可以使用下标设置现有索引处的值，替换该处已有的值：
+flavors[0] = "Fudge Ripple"
+let newFirstFlavor = flavors[0]
+如果你使用的索引并不包含在数组中，将会导致错误。使用下标只能替换可变数组中的值，无法添加或移除值。
+
+总结：
+数组中的项目都具有相同的类型。
+数组中的项目都具有特定顺序。
+数组的第一个索引是 0，而不是 1。
+使用索引访问数组是有风险的。如果使用的索引超出数组的范围，程序将会崩溃。
+你可以使用 count 属性了解数组中的项目数量。
+你可以使用 for…in 循环，依次安全访问数组中的每个项目，而无需知道数组中有多少项目。
+可变数组允许添加、移除和替换项目。
+你可以将一个数组附加到另一个数组，以合并两个数据源，然后将该数组作为单个源进行处理。
+coutains 方法 返回一个Bool值，用于做“是否包含”的判断
