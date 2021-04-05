@@ -166,3 +166,50 @@ enum LunchChoice {
 var choice: LunchChoice
 如果 Swift 已经知道预期的类型，你就无需输入枚举名称。由于你已经指定了 `choice` 的类型，所以你可以在赋值时省略枚举名称：
 choice = .burger
+
+switch 
+enum Quality {
+    case bad, poor, acceptable, good, great
+}
+switch quality {
+case .bad:
+    print("That really won't do")
+case .poor:
+    print("That's not good enough")
+case .great:
+    print("Wow this is incredible!")
+default:
+    print("OK, I'll take it")
+}
+这个 switch 语句没有针对枚举的每一个可能值提供一个事例。而是使用了 default 关键字，如果找不到其他匹配项，则使用该项。
+
+let animal = "cat"
+
+func soundFor(animal: String) -> String {
+    switch animal {
+        case "cat":
+            return "Meow!"
+        case "dog":
+            return "Woof!"
+        case "cow":
+            return "Moo!"
+        case "chicken":
+            return "Cluck!"
+        default:
+            return "I don't know that animal!"
+    }
+}
+soundFor(animal: animal)
+soundFor(animal: "dog")
+soundFor(animal: "cow")
+soundFor(animal: "chicken")
+soundFor(animal: "lizard")
+
+你可以使用枚举来表示一组相关值中的一个值。每个可能的值称为事例。
+创建一个枚举，就是创建一个新类型。该类型的实例所包含的值，必须与其中一个指定事例相匹配。
+使用枚举可使代码更易于阅读和编写，因为它能清楚指明可能的值是什么，以及值的含义。
+你可以使用 == 来比较枚举值，或者使用 switch 语句来测试所有可能的值。
+与 if 语句一样，switch 语句也是一种在代码中做出决策的方法。Switch 语句与枚举是最佳拍档，但是可用于开启任何类型的值。
+因为 switch 语句必须详尽，所以你必须兼顾每个可能的值。你可以使用默认事例来处理任何尚未指定的值。
+与结构一样，你可以向枚举添加计算型属性和方法。
+
