@@ -150,3 +150,19 @@ let newFirstFlavor = flavors[0]
 可变数组允许添加、移除和替换项目。
 你可以将一个数组附加到另一个数组，以合并两个数据源，然后将该数组作为单个源进行处理。
 coutains 方法 返回一个Bool值，用于做“是否包含”的判断
+
+
+枚举：
+枚举通常以缩写形式“enum”进行调用。
+枚举的名称与所有其他类型名称一样，以大写字母开头。
+事例的名称与属性和方法的名称一样，以小写字母开头。
+枚举的名称应该是单数形式
+enum LunchChoice {
+    case pasta
+    case burger
+    case soup
+}
+枚举的好处是，它可以将选项限制为其中一个事例。
+var choice: LunchChoice
+如果 Swift 已经知道预期的类型，你就无需输入枚举名称。由于你已经指定了 `choice` 的类型，所以你可以在赋值时省略枚举名称：
+choice = .burger
