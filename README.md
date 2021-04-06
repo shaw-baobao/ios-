@@ -213,3 +213,9 @@ soundFor(animal: "lizard")
 因为 switch 语句必须详尽，所以你必须兼顾每个可能的值。你可以使用默认事例来处理任何尚未指定的值。
 与结构一样，你可以向枚举添加计算型属性和方法。
 
+
+制表：
+制表器记录了你录入的每个唯一 String 值的次数。它具有以下属性和方法：
+values: [String]  已制表字符串值的排序数组。
+func incrementCount(forValue value: String)  增加给定值的计数。如果之前未见过该值，它将被添加到 values 数组，计数为 1。
+func count(forValue value: String) -> Int  返回给定值的计数。如果该值未被制表，此方法将返回 0。
