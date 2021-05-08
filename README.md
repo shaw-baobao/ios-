@@ -294,3 +294,104 @@ func indexOfMinimum(from tabulatedValues: [TabulatedValue]) -> Int {
     return minIndex
 }
 
+
+像素艺术：
+所有页面都有一个 display 实例，其类型为 PixelDisplay。PixelDisplay 的属性和方法为你提供了低分辨率图形显示的界面。此页面上的显示具有 8 x 8 网格的 64 个像素。与数组一样，像素坐标是零索引的。
+setPixel(x:y:color) 方法处理指定 x 和 y 位置的单个像素。
+display.setPixel(x: 0, y: 0, color: .blue)
+display.setPixel(x: 7, y: 7, color: Color(red: 0.7, green: 0.6, blue: 0.3))
+PixelDisplay 的 backgroundColor 属性可以控制显示背景颜色。
+display.backgroundColor = .green
+
+创建用于绘制水平和垂直线条的函数。水平线条函数hLine(x:y:length:color) 函数。然后 vLine(x:y:length:color:) 函数绘制垂直线条。
+func hline(x: Int, y: Int, length: Int, color: Color) {
+    for i in 0 ... length - 1 {
+        // Set the next pixel along the horizontal line
+        display.setPixel(x: x + i, y: y, color: color)
+    }
+}
+
+func vLine(x: Int, y: Int, length: Int, color: Color) {
+    for i in 0 ... length - 1 {
+        // Set the next pixel along the vertical line
+        display.setPixel(x: x, y: y + i, color: color)
+    }
+}
+hline(x: 0, y: 0, length: 8, color: .blue)
+vLine(x: 0, y: 0, length: 8, color: .yellow)
+
+创建 block 函数来创建一个矩形色块。它应该包含五个参数：x、y、width、height 和 color。重复使用 hLine 函数绘制块。使用块函数创建不同颜色的块。
+func block(x: Int, y: Int, width: Int, height: Int, color: Color) {
+    for i in 0 ... height - 1 {
+        hline(x: x, y: y + i, length: width, color: color)
+    }
+}
+
+block(x: 3, y: 3, width: 5, height: 5, color: .blue)
+
+新的 block 函数算法如下：
+创建一个空的 Pixels 数组
+对于每个 x 值：
+对于每个 y 值： 用 x 和 y 创建一个像素并将其添加到数组中
+批量设置数组中的像素
+func fastBlock(x: Int, y: Int, width: Int, height: Int, color: Color) {
+    var pixels = [Pixel]()
+    for x in x ... x + width - 1 {
+        for y in y ... y + height - 1 {
+            pixels.append(Pixel(x: x, y: y, color: color))
+        }
+    }
+    display.batchSetPixels(pixels)
+}
+fastBlock(x: 1, y: 1, width: 38, height: 38, color: .white)
+
+PixelDisplay  wait() 方法会将显示暂停一段给定的时间，然后继续进行下一个绘图操作。wait() 与 clear() 方法合用可以通过绘图、暂停、清除屏幕并更新绘图来创建动画。
+
+下面的代码以每秒 30 帧的速度在整个显示过程中动画绘制单个白色像素。
+var frameTime = 1.0 / 30.0
+
+for i in 0...39 {
+    display.setPixel(x: i, y: 5, color: .white)
+    display.wait(time: frameTime)
+    display.clear()
+}
+
+表情符号：
+face(xPos: 5, yPos: 5, color: .green)
+leftEye(x: 5, y: 20, color: .red, blinking: false)
+rightEye(x: 5, y: 25, color: .blue, blinking: true)
+smile(x: 5, y: 30, color: .magenta)
+
+Smiley 结构
+struct Smiley {
+    var x: Int
+    var y: Int
+    var faceColor: Color
+    var eyeColor: Color
+    var smileColor: Color
+    var leftBlink: Bool
+    var rightBlink: Bool
+
+    func draw() {
+        // Your code goes here
+        face(xPos: x, yPos: y, color: faceColor)
+        leftEye(x: x + 3, y: y + 7, color: eyeColor, blinking: leftBlink)
+        rightEye(x: x + 9, y: y + 7, color: eyeColor, blinking: rightBlink)
+        smile(x: x + 4, y: y + 2, color: smileColor)
+    }
+}
+
+let smiley = Smiley(x: 5, y: 5, faceColor: .yellow, eyeColor: .black, smileColor: .black, leftBlink: false, rightBlink: false)
+smiley.draw()
+
+let winky = Smiley(x: 22, y: 5, faceColor: .purple, eyeColor: .white, smileColor: .green, leftBlink: false, rightBlink: true)
+winky.draw()
+
+setPixel(_ pixel: Pixel) 方法可用于 PixelDisplay。
+// Sample pixel using the new `setPixel(_ pixel: Pixel)` method
+let pixel = Pixel(x: 0, y: 0, color: .red)
+display.setPixel(pixel)
+
+使用 displaySize 变量在四个显示分辨率中进行选择。默认值为 .fortyByForty。务必在任何代码之前，首先设置 displaySize。
+displaySize = .fortyByForty
+
