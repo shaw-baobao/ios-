@@ -219,3 +219,45 @@ soundFor(animal: "lizard")
 values: [String]  已制表字符串值的排序数组。
 func incrementCount(forValue value: String)  增加给定值的计数。如果之前未见过该值，它将被添加到 values 数组，计数为 1。
 func count(forValue value: String) -> Int  返回给定值的计数。如果该值未被制表，此方法将返回 0。
+
+
+处理数据：
+append方法： append() 方法将一个字符附加到一个字符串变量的尾部。
+
+lowercased() 方法创建小写字符串。
+
+下面的函数确定两个字符串之间的“编辑距离”，即它们之间的差异程度。它基于一种称为 Wagner-Fischer 的著名算法。
+func editDistance(from a: String, to b: String) -> Int {
+    let m = a.count
+    let n = b.count
+    var matrix = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
+
+    // initialize matrix
+    for index in 1...m {
+        // the distance of any first string to an empty second string
+        matrix[index][0] = index
+    }
+
+    for index in 1...n {
+        // the distance of any second string to an empty first string
+        matrix[0][index] = index
+    }
+
+    // compute Levenshtein distance
+    for (i, selfChar) in a.enumerated() {
+        for (j, otherChar) in b.enumerated() {
+            if otherChar == selfChar {
+                // substitution of equal symbols with cost 0
+                matrix[i + 1][j + 1] = matrix[i][j]
+            } else {
+                // minimum of the cost of insertion, deletion, or substitution
+                // added to the already computed costs in the corresponding cells
+                matrix[i + 1][j + 1] = min(matrix[i][j] + 1, matrix[i + 1][j] + 1, matrix[i][j + 1] + 1)
+            }
+        }
+    }
+
+    return matrix[m][n]
+}
+editDistance(from: "cat", to: "cake")
+
