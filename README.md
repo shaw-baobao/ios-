@@ -213,15 +213,22 @@ soundFor(animal: "lizard")
 因为 switch 语句必须详尽，所以你必须兼顾每个可能的值。你可以使用默认事例来处理任何尚未指定的值。
 与结构一样，你可以向枚举添加计算型属性和方法。
 
-
+处理数据：
 制表：
+Tabulator 类型，用于处理调查数据。
 制表器记录了你录入的每个唯一 String 值的次数。它具有以下属性和方法：
 values: [String]  已制表字符串值的排序数组。
 func incrementCount(forValue value: String)  增加给定值的计数。如果之前未见过该值，它将被添加到 values 数组，计数为 1。
 func count(forValue value: String) -> Int  返回给定值的计数。如果该值未被制表，此方法将返回 0。
+[TabulatedValue] 类型的 tabulatedValues。TabulatedValue 是一个简单的结构，包含两个构件：值及其计数。请注意，该数组不会以任何特定顺序返回。你将看到，每次代码运行时，它都会改变。
+Tabulator 类型median() 方法将提供中位 TabulatedValue，而 medianAbsoluteDeviation() 方法将提供已制表值的绝对中位差。
+要将节目分为三个等级，可以应用以下算法
+如果节目计数小于中位数减去绝对中位差，则表示不太受欢迎。
+如果节目计数大于中位数加上绝对中位差，则表示非常受欢迎。
+否则，节目中等受欢迎。
 
+数组常量 randomShowData可以模拟调查结果
 
-处理数据：
 append方法： append() 方法将一个字符附加到一个字符串变量的尾部。
 
 lowercased() 方法创建小写字符串。
@@ -260,4 +267,30 @@ func editDistance(from a: String, to b: String) -> Int {
     return matrix[m][n]
 }
 editDistance(from: "cat", to: "cake")
+
+最大值和最小值
+编写算法，用于返回数组中值的“索引”，而不是返回 TabulatedValue 本身。这里有一个适合最大值索引的好办法 (对于最小值，可采用类似的办法)：
+创建一个变量以跟踪最大值项目的索引，该变量的初始值为零
+循环遍历数组索引。对于每个索引：
+获取数组中的该项目。如果该项目的计数大于最大值项目的计数，则将最大值索引更新为当前索引。
+完成下面两个函数，以在 TabulatedValue 数组中返回具有最大和最小计数的项目的索引。(提示：使用 for ... in 样式，计数范围从零开始，到数组的最后一个索引为止：for i in 0 ... tabulatedValues.count - 1。)
+func indexOfMaximum(from tabulatedValues: [TabulatedValue]) -> Int {
+    var maxIndex = 0
+    for i in 0 ... tabulatedValues.count - 1 {
+        if tabulatedValues[i].count > tabulatedValues[maxIndex].count {
+            maxIndex = i
+        }
+    }
+    return maxIndex
+}
+
+func indexOfMinimum(from tabulatedValues: [TabulatedValue]) -> Int {
+    var minIndex = 0
+    for i in 0 ... tabulatedValues.count - 1 {
+        if tabulatedValues[i].count < tabulatedValues[minIndex].count {
+            minIndex = i
+        }
+    }
+    return minIndex
+}
 
