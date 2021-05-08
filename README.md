@@ -395,3 +395,180 @@ display.setPixel(pixel)
 使用 displaySize 变量在四个显示分辨率中进行选择。默认值为 .fortyByForty。务必在任何代码之前，首先设置 displaySize。
 displaySize = .fortyByForty
 
+
+
+
+密码安全性
+let tenMostCommonPasswords = [
+    "123456",
+    "password",
+    "12345678",
+    "qwerty",
+    "12345",
+    "123456789",
+    "letmein",
+    "1234567",
+    "football",
+    "iloveyou"
+]
+通过 Array 的 contains() 方法来确保用户没有选择这些密码。显示一条消息，通知用户是否设置了安全的密码。
+let password = "password"
+
+if tenMostCommonPasswords.contains(password) {
+    print("This is a common password.Please choose another one.")
+} else {
+    print("Your password is secure.")
+}
+
+至少包含 16 个字符
+至少包含 1 个英文字母
+至少包含 1 个数字
+至少包含 1 个标点符号
+let digits = "0123456789"
+let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+let password = "password"
+
+if tenMostCommonPasswords.contains(password) {
+    print("This is a common password.Please choose another one.")
+} else if password.count < 16 {
+    print("Your password must contain at least 16 characters.")
+} else {
+    var numberOfDigits = 0
+    var numberOfPunctuationCharacters = 0
+    var numberOfRegularLetters = 0
+
+    for character in password {
+        if digits.contains(character) {
+            numberOfDigits += 1
+        } else if punctuation.contains(character) {
+            numberOfPunctuationCharacters += 1
+        } else {
+            numberOfRegularLetters += 1
+        }
+    }
+
+    if numberOfDigits == 0 {
+        print("Your password must contain at least one digit.")
+    } else if numberOfPunctuationCharacters == 0 {
+        print("Your password must contain at least one of these punctuation marks: \(punctuation).")
+    } else if numberOfRegularLetters == 0 {
+        print("Your password must contain at least one regular letter.")
+    } else {
+        print("Your password is secure.")
+    }
+}
+
+下面结合其他新规则运用你的算法：
+
+至少包含一个大写字母和一个小写字母
+不得包含用户名
+
+要检测字符是否为大写，可使用 isUppercase 属性。
+let username = "swiftC0der84"
+let password = "password"
+
+if tenMostCommonPasswords.contains(password) {
+    print("This is a common password.Please choose another one.")
+} else if password.count < 16 {
+    print("Your password must contain at least 16 characters.")
+} else if password.contains(username) {
+    print("Your password can't contain your username.")
+} else {
+    var numberOfDigits = 0
+    var numberOfPunctuationCharacters = 0
+    var numberOfRegularLetters = 0
+    var numberOfUppercaseLetters = 0
+    var numberOfLowercaseLetters = 0
+
+    for character in password {
+        if digits.contains(character) {
+            numberOfDigits += 1
+        } else if punctuation.contains(character) {
+            numberOfPunctuationCharacters += 1
+        } else {
+            numberOfRegularLetters += 1
+
+            if character.isUppercase {
+                numberOfUppercaseLetters += 1
+            } else {
+                numberOfLowercaseLetters += 1
+            }
+        }
+    }
+
+    if numberOfDigits == 0 {
+        print("Your password must contain at least one digit.")
+    } else if numberOfPunctuationCharacters == 0 {
+        print("Your password must contain at least one of these punctuation marks: \(punctuation).")
+    } else if numberOfRegularLetters == 0 {
+        print("Your password must contain at least one regular letter.")
+    } else if numberOfUppercaseLetters == 0 {
+        print("Your password must contain at least one uppercase letter.")
+    } else if numberOfLowercaseLetters == 0 {
+        print("Your password must contain at least one lowercase letter.")
+    } else {
+        print("Your password is secure.")
+    }
+}
+暴力破解
+passwordIsCorrect(_:) 函数是一个假想的 Web 服务的登录表单，在输入正确的密码后返回 true。guessPasswordOfThreeCharacters(containing:) 函数使用暴力算法，尝试传入字符的所有可能组合。
+import Foundation
+
+func passwordIsCorrect(_ password: String) -> Bool {
+    return password == "xia"
+}
+
+let digits = "0123456789"
+let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+let lowercaseAlphas = "abcdefghijklmnopqrstuvwxyz"
+let uppercaseAlphas = lowercaseAlphas.uppercased()
+
+func guessPasswordOfThreeCharacters(containing characters: String) {
+    var password: String = ""
+
+    for a in characters {
+        for b in characters {
+            for c in characters {
+                password = String(a) + String(b) + String(c)
+                if passwordIsCorrect(password) {
+                    print("Found password: \(password)")
+                    // The return statement below means that the function exits
+                    // early when the password is guessed, rather than executing
+                    // all loops to completion.
+                    return
+                }
+            }
+        }
+    }
+}
+
+guessPasswordOfThreeCharacters(containing: digits + lowercaseAlphas)
+
+
+
+数据可视化
+
+addWedge(proportion:color:) 之类的函数来设置你的图表
+
+饼图
+新 API 的饼图包含两种新类型：PieWedge 和 PieChartView。
+PieWedge 结构提供了几种使用饼图创建视觉效果的方法。它具有以下属性：
+proportion：楔块占饼图的百分比，表示为 Double。
+color：楔块的颜色。你可以使用以下任一值。(请记住在颜色名称前使用句点。否则，Swift 将会返回错误“使用未解析的标识符”。)
+.black
+.blue
+.brown
+.cyan
+.darkGray
+.gray
+.green
+.lightGray
+.magenta
+.orange
+.purple
+.red
+.yellow
+
+scale：楔块半径与饼图的自然半径之比，表示为Double。小于 1.0，该楔块比标准尺寸的楔块小；大于 1.0，该楔块比标准尺寸的楔块大 (通常期望的效果)。
+offset：楔块到饼图中心的距离与楔块尺寸之比。偏移量为 0 表示楔块在饼图的中心。偏移量为 1.0 表示楔块的中心点移动到其外边缘所在的位置。
+makePieChart() 函数会创建名为 pieChartView 的 PieChartView 实例。PieChartView 具有名为 wedges 的属性，该属性是 PieWedge 实例的数组。为该属性分配一个楔块数组，或使用 Array 的 append() 方法一次添加一个楔块。
